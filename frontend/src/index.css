@@ -1,0 +1,909 @@
+/* frontend/src/index.css */
+
+/* --- CSS Variables for Colors (Default: Light Mode) --- */
+:root {
+  --color-primary: #4F86F7; /* Main Blue */
+  --color-secondary: #34D399; /* Accent Green */
+  --color-danger: #EF4444; /* Red for errors/logout */
+
+  --color-text-dark: #2D3748; /* Darkest text on light backgrounds */
+  --color-text-medium: #4A5568; /* Medium text */
+  --color-text-light: #718096; /* Lighter text (e.g., helper text) */
+
+  --color-background-light: #F7FAFC; /* Overall page background */
+  --color-background-card: #ffffff; /* Card/form background */
+  --color-background-code: #F0F4F8; /* Background for code blocks / subtle gray areas */
+  --color-background-summary: #EBF8FF; /* Background for summary box */
+
+  --color-border-light: #E2E8F0; /* Light borders */
+  --color-border-medium: #CBD5E0; /* Medium borders */
+
+  --color-shadow-light: rgba(0, 0, 0, 0.1); /* Light shadows */
+  --color-shadow-medium: rgba(0, 0, 0, 0.15); /* Medium shadows */
+  --color-shadow-dark: rgba(0, 0, 0, 0.25); /* Darker shadows (if needed) */
+
+  /* Transitions for smooth theme changes */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Dark Mode Variables (Applied when html[data-theme="dark"] or system prefers dark) --- */
+/* --- Dark Mode Variables (Applied when html[data-theme="dark"] or system prefers dark) --- */
+
+/* Rule 1: For manual toggle (when data-theme="dark" is set on <html>) */
+html[data-theme='dark'] {
+  --color-primary: #63B3ED;
+  --color-secondary: #68D391;
+  --color-danger: #FC8181;
+  --color-text-dark: #E2E8F0;
+  --color-text-medium: #A0AEC0;
+  --color-text-light: #718096;
+  --color-background-light: #1A202C;
+  --color-background-card: #2D3748;
+  --color-background-code: #28303C;
+  --color-background-summary: #2C3540;
+  --color-border-light: #4A5568;
+  --color-border-medium: #718096;
+  --color-shadow-light: rgba(0, 0, 0, 0.2);
+  --color-shadow-medium: rgba(0, 0, 0, 0.3);
+  --color-shadow-dark: rgba(0, 0, 0, 0.4);
+}
+
+/* Rule 2: For automatic system preference (prefers-color-scheme) */
+@media (prefers-color-scheme: dark) {
+  :root { /* This applies to the root element, which is <html> */
+    --color-primary: #63B3ED;
+    --color-secondary: #68D391;
+    --color-danger: #FC8181;
+    --color-text-dark: #E2E8F0;
+    --color-text-medium: #A0AEC0;
+    --color-text-light: #718096;
+    --color-background-light: #1A202C;
+    --color-background-card: #2D3748;
+    --color-background-code: #28303C;
+    --color-background-summary: #2C3540;
+    --color-border-light: #4A5568;
+    --color-border-medium: #718096;
+    --color-shadow-light: rgba(0, 0, 0, 0.2);
+    --color-shadow-medium: rgba(0, 0, 0, 0.3);
+    --color-shadow-dark: rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* --- Light Mode Variables (Explicit) --- */
+html[data-theme='light'] {
+  --color-primary: #4F86F7;
+  --color-secondary: #34D399;
+  --color-danger: #EF4444;
+  --color-text-dark: #2D3748;
+  --color-text-medium: #4A5568;
+  --color-text-light: #718096;
+  --color-background-light: #F7FAFC;
+  --color-background-card: #ffffff;
+  --color-background-code: #F0F4F8;
+  --color-background-summary: #EBF8FF;
+  --color-border-light: #E2E8F0;
+  --color-border-medium: #CBD5E0;
+  --color-shadow-light: rgba(0, 0, 0, 0.1);
+  --color-shadow-medium: rgba(0, 0, 0, 0.15);
+  --color-shadow-dark: rgba(0, 0, 0, 0.25);
+}
+
+
+/* --- Basic Resets and Global Styles --- */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--color-background-light);
+  color: var(--color-text-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+
+/* --- Overall App Container (from App.jsx) --- */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* --- Main Content Area (from App.jsx) --- */
+.app-main-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+/* --- Header Styling (from Header.jsx) --- */
+.app-header {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 18px 35px;
+  box-shadow: 0 4px 8px var(--color-shadow-medium);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
+  margin: 0;
+  left: 0;
+  top: 0;
+  position: relative;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.header-inner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.app-logo {
+  height: 45px;
+  margin-right: 18px;
+}
+
+.app-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.main-nav {
+  display: flex;
+  gap: 20px;
+  margin-left: auto;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nav-link {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s, text-decoration 0.2s;
+}
+
+.nav-link:hover {
+    color: var(--color-border-light);
+    text-decoration: underline;
+}
+
+
+/* --- Footer Styling (from Footer.jsx) --- */
+.app-footer {
+  background-color: var(--color-text-dark);
+  color: var(--color-border-light);
+  padding: 18px 35px;
+  text-align: center;
+  font-size: 14px;
+  width: 100vw;
+  min-width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
+  margin: 0;
+  left: 0;
+  bottom: 0;
+  position: relative;
+}
+
+.footer-text {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.linkedin-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.linkedin-link:hover {
+  text-decoration: underline;
+  color: var(--color-primary);
+  filter: brightness(0.9);
+}
+
+.linkedin-logo {
+  height: 22px;
+  filter: invert(0) grayscale(0) brightness(1.2);
+  transition: filter 0.3s ease;
+}
+html[data-theme='dark'] .linkedin-logo {
+    filter: invert(1) grayscale(0) brightness(1);
+}
+
+
+/* --- Auth Form Container (for LoginPage.jsx and RegisterPage.jsx) --- */
+.auth-form-container {
+  background-color: var(--color-background-card);
+  padding: 45px;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px var(--color-shadow-light);
+  max-width: 420px;
+  width: 100%;
+  border: 1px solid var(--color-border-light);
+  box-sizing: border-box;
+}
+
+/* --- Form Headings --- */
+.auth-form-container h2 {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-text-dark);
+  margin-bottom: 30px;
+}
+
+/* --- Form Group (label + input) --- */
+.form-group {
+  margin-bottom: 20px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group label {
+  display: block;
+  color: var(--color-text-medium);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--color-border-medium);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--color-text-dark);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79, 134, 247, 0.2);
+}
+
+/* --- Auth Buttons --- */
+.auth-button {
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  margin-top: 25px;
+}
+
+.auth-button:active {
+    transform: translateY(1px);
+}
+
+.login-button {
+  background-color: var(--color-primary);
+}
+
+.login-button:hover {
+  background-color: var(--color-primary);
+  filter: brightness(0.9);
+}
+
+.register-button {
+  background-color: var(--color-secondary);
+}
+
+.register-button:hover {
+  background-color: var(--color-secondary);
+  filter: brightness(0.9);
+}
+
+.auth-button:disabled {
+  background-color: var(--color-border-medium);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* --- Auth Links (e.g., "Register here") --- */
+.auth-link-text {
+  text-align: center;
+  margin-top: 25px;
+  color: var(--color-text-light);
+  font-size: 15px;
+}
+
+.auth-link-text a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.auth-link-text a:hover {
+  color: var(--color-primary);
+  filter: brightness(0.9);
+  text-decoration: underline;
+}
+
+/* --- Error and Success Messages --- */
+.error-message {
+  color: var(--color-danger);
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--color-danger);
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.success-message {
+  color: var(--color-secondary);
+  background-color: rgba(52, 211, 153, 0.1);
+  border: 1px solid var(--color-secondary);
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* --- Password Toggle Styling --- */
+.form-group.password-group {
+  position: relative;
+}
+
+.form-group.password-group input {
+  padding-right: 65px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 65%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+  cursor: pointer;
+  user-select: none;
+  padding: 5px;
+  background: transparent;
+  border-radius: 4px;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+.password-toggle:hover {
+  color: var(--color-primary);
+  filter: brightness(0.9);
+}
+
+
+/* --- Document Upload Page Styling (from DocumentUploadPage.jsx) --- */
+.main-dashboard-container {
+  background-color: var(--color-background-card);
+  padding: 45px;
+  border-radius: 16px;
+  box-shadow: 0 15px 30px var(--color-shadow-light);
+  max-width: 850px;
+  width: 100%;
+  border: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.main-dashboard-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin: 0;
+  text-align: center;
+}
+
+.upload-guidelines {
+    background-color: var(--color-background-code);
+    border: 1px solid var(--color-border-medium);
+    border-radius: 8px;
+    padding: 20px;
+    font-size: 15px;
+    color: var(--color-text-medium);
+    line-height: 1.6;
+}
+
+.upload-guidelines p {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.upload-guidelines ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.upload-guidelines ul li {
+    margin-bottom: 5px;
+}
+
+.upload-guidelines strong {
+    color: var(--color-text-dark);
+}
+
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 25px;
+  border: 2px dashed var(--color-border-medium);
+  border-radius: 12px;
+  background-color: var(--color-background-code);
+}
+
+.file-input {
+  display: block;
+  width: calc(100% - 26px);
+  padding: 12px;
+  border: 1px solid var(--color-border-medium);
+  border-radius: 8px;
+  background-color: var(--color-background-card);
+  cursor: pointer;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: var(--color-text-dark);
+}
+
+.file-input::-webkit-file-upload-button {
+  background-color: var(--color-border-light);
+  color: var(--color-text-dark);
+  padding: 10px 15px;
+  border: 1px solid var(--color-border-medium);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.file-input::-webkit-file-upload-button:hover {
+  background-color: var(--color-border-medium);
+}
+
+.upload-button {
+  background-color: var(--color-primary);
+  color: white;
+  width: 180px;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 700;
+  transition: background-color 0.2s, transform 0.2s;
+  align-self: center;
+}
+
+.upload-button:hover:not(:disabled) {
+  background-color: var(--color-primary);
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+}
+.upload-button:active {
+    transform: translateY(0);
+}
+
+.upload-button:disabled {
+  background-color: var(--color-border-medium);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.response-display {
+  background-color: var(--color-background-card);
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  padding: 25px;
+  max-height: 450px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: inset 0 2px 4px var(--color-shadow-light);
+}
+
+.response-display h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 0;
+}
+
+.response-display .warning-message {
+  color: var(--color-danger);
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--color-danger);
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 0;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.response-display .status-message {
+  color: var(--color-primary);
+  background-color: rgba(79, 134, 247, 0.1);
+  border: 1px solid var(--color-primary);
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 0;
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.extracted-text-heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-medium);
+    margin: 0;
+}
+
+.extracted-text {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    background-color: var(--color-background-code);
+    padding: 15px;
+    border-radius: 8px;
+    max-height: 180px;
+    overflow-y: auto;
+    border: 1px solid var(--color-border-medium);
+    line-height: 1.5;
+    color: var(--color-text-medium);
+}
+
+.summary-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.summary-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text-dark);
+    padding: 15px;
+    border-left: 4px solid var(--color-primary);
+    background-color: var(--color-background-summary);
+    border-radius: 8px;
+}
+
+.summary-preview-box {
+  background: var(--color-background-summary);
+  border-left: 4px solid var(--color-primary);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 10px 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.summary-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 2px;
+}
+.summary-text {
+  font-size: 15px;
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+
+.logout-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.logout-button {
+  background-color: var(--color-danger);
+  color: white;
+  width: 180px;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 700;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.logout-button:hover {
+  background-color: var(--color-danger);
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+}
+.logout-button:active {
+    transform: translateY(0);
+}
+
+/* Improved summary text styling for response display */
+.response-display .summary-text, .summary-text {
+  font-size: 1.15rem;
+  font-family: 'Segoe UI', 'Poppins', 'Roboto', Arial, sans-serif;
+  color: var(--color-text-dark);
+  line-height: 1.8;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+html[data-theme='dark'] .app-footer {
+  background-color: #181d29;
+  color: #e2e8f0;
+}
+
+/* --- Centered Content Utility --- */
+.centered-content {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 12px 20px;
+  }
+
+  .app-logo {
+    height: 35px;
+    margin-right: 10px;
+  }
+
+  .app-title {
+    font-size: 24px;
+  }
+
+  .main-nav {
+      gap: 10px;
+      flex-direction: column;
+      align-items: flex-end;
+  }
+  .nav-link, .theme-toggle-button {
+      font-size: 16px;
+      padding: 5px 10px;
+  }
+  .theme-toggle-button {
+      margin-left: 0;
+  }
+
+  .app-main-content {
+    padding: 15px;
+  }
+
+  .main-dashboard-container, .auth-form-container {
+      padding: 30px;
+      border-radius: 12px;
+  }
+
+  .main-dashboard-title, .auth-form-container h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+  }
+
+  .upload-guidelines {
+      padding: 15px;
+      font-size: 14px;
+  }
+  .upload-guidelines ul {
+      margin-left: 15px;
+  }
+
+  .upload-section {
+      padding: 15px;
+  }
+
+  .file-input {
+      width: calc(100% - 20px);
+  }
+
+  .upload-button, .logout-button {
+      width: 140px;
+      font-size: 15px;
+      padding: 10px 0;
+  }
+
+  .extracted-text, .summary-text {
+      font-size: 13px;
+      padding: 12px;
+  }
+
+  .response-display {
+      padding: 15px;
+      gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 10px 15px;
+  }
+
+  .app-logo {
+    height: 30px;
+  }
+
+  .app-title {
+    font-size: 20px;
+  }
+
+  .auth-form-container {
+      padding: 25px;
+      border-radius: 10px;
+  }
+
+  .auth-form-container h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+  }
+
+  .form-group input {
+      padding: 10px;
+      font-size: 14px;
+  }
+
+  .auth-button {
+      padding: 10px;
+      font-size: 16px;
+  }
+
+  .main-dashboard-container {
+      padding: 25px;
+      border-radius: 10px;
+      gap: 15px;
+  }
+
+  .main-dashboard-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+  }
+
+  .upload-section {
+      padding: 10px;
+      gap: 10px;
+  }
+
+  .extracted-text, .summary-text {
+      font-size: 12px;
+      padding: 10px;
+  }
+}
+
+/* --- Theme Switch Toggle Styles --- */
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 12px;
+}
+.theme-switch input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.theme-switch .slider {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  background: var(--color-border-medium);
+  border-radius: 26px;
+  transition: background 0.3s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  display: inline-block;
+}
+.theme-switch .slider:before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s, background 0.3s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+.theme-switch input[type="checkbox"]:checked + .slider {
+  background: var(--color-primary);
+}
+.theme-switch input[type="checkbox"]:checked + .slider:before {
+  transform: translateX(22px);
+  background: #222;
+}
+.theme-switch .theme-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  min-width: 40px;
+  text-align: left;
+}
+html[data-theme='dark'] .theme-switch .theme-label {
+  color: var(--color-text-dark);
+}
+
+html[data-theme='dark'] input,
+html[data-theme='dark'] textarea {
+  color: #E2E8F0;
+  background-color: var(--color-background-card);
+  caret-color: #E2E8F0;
+}
+html[data-theme='dark'] input::placeholder,
+html[data-theme='dark'] textarea::placeholder {
+  color: #A0AEC0;
+  opacity: 1;
+}
+html[data-theme='dark'] input:focus,
+html[data-theme='dark'] textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.2);
+}
