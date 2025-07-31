@@ -1,4 +1,4 @@
-// src/main/java/com.ram.project.documentsummerizer/security/JwtAuthFilter.java
+
 package com.ram.project.documentsummerizer.security;
 
 import com.ram.project.documentsummerizer.service.AuthService;
@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-@Component // Make sure this is annotated as a Component for Spring to find it
+@Component 
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthFilter.class);
@@ -26,7 +26,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final AuthService authService;
     private final UserDetailsService userDetailsService;
 
-    // Constructor to inject AuthService and UserDetailsService
+    
     public JwtAuthFilter(AuthService authService, UserDetailsService userDetailsService) {
         this.authService = authService;
         this.userDetailsService = userDetailsService;
