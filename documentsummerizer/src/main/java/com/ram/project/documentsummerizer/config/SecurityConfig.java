@@ -1,12 +1,12 @@
-// src/main/java/com.ram.project.documentsummerizer/config/SecurityConfig.java
+
 package com.ram.project.documentsummerizer.config;
 
 import com.ram.project.documentsummerizer.security.JwtAuthFilter;
 import com.ram.project.documentsummerizer.service.AuthService;
-import com.ram.project.documentsummerizer.service.CustomUserDetailsService; // Corrected import
+import com.ram.project.documentsummerizer.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy; // <--- KEEP THIS IMPORT!
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -29,14 +29,14 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final JwtAuthFilter jwtAuthFilter; // Field declaration
-    private final UserDetailsService userDetailsService; // Field declaration
-    private final AuthService authService; // Field declaration
+    private final JwtAuthFilter jwtAuthFilter;
+    private final UserDetailsService userDetailsService; 
+    private final AuthService authService; 
 
-    // Constructor should use @Lazy for beans that might create a cycle
-    public SecurityConfig(@Lazy JwtAuthFilter jwtAuthFilter, // <--- @Lazy MUST BE HERE
-                          UserDetailsService userDetailsService, // This is fine without @Lazy typically
-                          @Lazy AuthService authService) { // <--- @Lazy MUST BE HERE
+    //using @Lazy because i'am getting circular dependency
+    public SecurityConfig(@Lazy JwtAuthFilter jwtAuthFilter, 
+                          UserDetailsService userDetailsService,
+                          @Lazy AuthService authService) { 
         this.jwtAuthFilter = jwtAuthFilter;
         this.userDetailsService = userDetailsService;
         this.authService = authService;
@@ -47,7 +47,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // AuthenticationManager bean definition
+  
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
@@ -61,7 +61,7 @@ public class SecurityConfig {
         return provider;
     }
 
-    // CORS configuration source bean remains the same
+    // CORS configuration done
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -75,13 +75,12 @@ public class SecurityConfig {
         return source;
     }
 
-    // Main Security Filter Chain configuration
+  
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, // Existing param
-                                                   AuthenticationManager authenticationManager // <--- Inject here
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, 
+                                                   AuthenticationManager authenticationManager 
                                                    ) throws Exception {
-        // --- Set AuthenticationManager into AuthService via setter ---
-        // This is done after AuthService bean itself is available (due to @Lazy on constructor)
+
         authService.setAuthenticationManager(authenticationManager);
 
         http
