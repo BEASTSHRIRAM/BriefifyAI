@@ -8,13 +8,13 @@ import java.time.LocalDateTime;
 public class Document {
     @Id
     private String id;
-    private String userId; // Will be set after user auth is implemented
+    private String userId;
     private String originalFileName;
     private String extractedText;
     private String summary;
     private LocalDateTime createdAt;
 
-    // Constructors
+   
     public Document() {
         this.createdAt = LocalDateTime.now();
     }
@@ -25,8 +25,7 @@ public class Document {
         this.createdAt = LocalDateTime.now();
     }
 
-    // Getters and Setters (Generate these via your IDE's auto-generate feature)
-    // Example:
+  
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
     public String getUserId() { return userId; }
