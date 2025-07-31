@@ -38,8 +38,8 @@ public class GroqService {
 
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("messages", Collections.singletonList(message));
-        requestBody.put("model", "llama3-8b-8192"); // Or "llama3-70b-8192" for a larger model if needed
-        requestBody.put("temperature", 0.3); // Lower temperature for more factual summaries
+        requestBody.put("model", "llama3-8b-8192"); //using this model if you want larger model you can use
+        requestBody.put("temperature", 0.3); //i am using Lower temperature for more factual summaries
 
         try {
             Map<String, Object> response = webClient.post()
@@ -48,7 +48,7 @@ public class GroqService {
                     .body(BodyInserters.fromValue(requestBody))
                     .retrieve()
                     .bodyToMono(Map.class)
-                    .block(); // Block for synchronous call (for simplicity in this project)
+                    .block(); // Block for synchronous call 
 
             if (response != null && response.containsKey("choices")) {
                 List<Map<String, Object>> choices = (List<Map<String, Object>>) response.get("choices");
