@@ -1,9 +1,9 @@
-// src/main/java/com.ram.project.documentsummerizer/service/AuthService.java
+
 package com.ram.project.documentsummerizer.service;
 
 import com.ram.project.documentsummerizer.model.User;
 import com.ram.project.documentsummerizer.repository.UserRepository;
-import org.springframework.security.authentication.AuthenticationManager; // Keep this import
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.context.annotation.Lazy;
@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration; // Keep this import
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration; 
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -33,23 +33,20 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    // --- REMOVED AuthenticationConfiguration from direct injection ---
-    private AuthenticationManager authenticationManager; // Field, but will be set via setter
+    
+    private AuthenticationManager authenticationManager; 
 
     private static final String SECRET_STRING = "aSuperSecretKeyForBriefifyAppThatIsAtLeast32BytesLongAndShouldBeVerySecure";
     private final SecretKey jwtSecret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET_STRING));
 
-    private final long jwtExpirationMinutes = 1440; // 24 hours in minutes
+    private final long jwtExpirationMinutes = 1440; 
 
     public AuthService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder) { // Constructor NO LONGER takes AuthenticationConfiguration
+                       PasswordEncoder passwordEncoder) { /
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
-    // --- NEW: Setter for AuthenticationManager ---
-    // This allows Spring to inject it AFTER AuthService is created, breaking the cycle.
-    // Use @Lazy if issues persist, but usually not needed with setter injection for this specific case.
+//using @Lazy here
     public void setAuthenticationManager(@Lazy AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
@@ -63,8 +60,8 @@ public class AuthService {
     }
 
     public String authenticateUserAndGenerateToken(String username, String password) {
-        // --- Access AuthenticationManager from the setter-injected field ---
-        if (this.authenticationManager == null) { // Defensive check
+        
+        if (this.authenticationManager == null) { 
             throw new IllegalStateException("AuthenticationManager has not been set in AuthService.");
         }
         Authentication authentication;
