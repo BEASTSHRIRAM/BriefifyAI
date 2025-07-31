@@ -1,4 +1,4 @@
-// frontend/src/main/java/com.ram.project.documentsummerizer/service/DocumentService.java
+
 package com.ram.project.documentsummerizer.service;
 
 import com.ram.project.documentsummerizer.model.Document;
@@ -18,10 +18,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
-import org.slf4j.Logger; // Using SLF4J Logger
-import org.slf4j.LoggerFactory; // Using SLF4J LoggerFactory
+import org.slf4j.Logger; 
+import org.slf4j.LoggerFactory; 
 import java.util.regex.Pattern;
-import java.util.Optional; // Import Optional
+import java.util.Optional;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -65,7 +65,7 @@ public class DocumentService {
             extractedText = extractTextFromNativePdf(is);
             logger.info("PDFBox extracted text length: {}", extractedText.length());
             pdfBoxExtractionPerformed = true;
-            if (isTextQualitySufficient(extractedText, MIN_TEXT_LENGTH_FOR_SUMMARY_PDFBOX)) { // Pass specific min length
+            if (isTextQualitySufficient(extractedText, MIN_TEXT_LENGTH_FOR_SUMMARY_PDFBOX)) { 
                 textSufficientForSummary = true;
                 processingStatus = "Processed via PDFBox (native text).";
                 logger.info("PDFBox text deemed sufficient (Length: {} >= {}). Skipping OCR.", extractedText.length(), MIN_TEXT_LENGTH_FOR_SUMMARY_PDFBOX);
@@ -74,7 +74,7 @@ public class DocumentService {
             }
         } catch (IOException e) {
             logger.warn("PDFBox initial read/extraction failed: {}", e.getMessage());
-            pdfBoxExtractionPerformed = true; // Still counts as an attempt
+            pdfBoxExtractionPerformed = true;
         }
 
         if (!textSufficientForSummary) {
@@ -87,7 +87,7 @@ public class DocumentService {
                 logger.info("Tesseract OCR extracted total text length: {}", extractedText.length());
                 processingStatus = "Document processed via OCR.";
 
-                if (isTextQualitySufficient(extractedText, MIN_TEXT_LENGTH_FOR_SUMMARY_OCR)) { // Pass specific min length
+                if (isTextQualitySufficient(extractedText, MIN_TEXT_LENGTH_FOR_SUMMARY_OCR)) { 
                     textSufficientForSummary = true;
                 } else {
                     processingStatus = "OCR yielded insufficient text.";
@@ -111,7 +111,7 @@ public class DocumentService {
         }
 
 
-        // 3. Summarize content using Groq LLaMA
+        //I am  Summarize content using Groq LLaMA and api key in app.properties
         if (textSufficientForSummary) {
             String textForSummary = extractedText;
             if (extractedText.length() > SUMMARY_INPUT_MAX_LENGTH) {
@@ -131,7 +131,7 @@ public class DocumentService {
             summary = "Summary not generated due to insufficient extracted text.";
         }
 
-        // 4. Save to MongoDB
+        // I am Saving to MongoDB
         Document doc = new Document(originalFileName, extractedText);
         doc.setSummary(summary);
 
@@ -148,7 +148,7 @@ public class DocumentService {
         }
         documentRepository.save(doc);
 
-        // 5. Prepare final String response
+        // then Prepare final String response
         responseMessageBuilder.insert(0, "--- Processing Complete! ---\nFile: " + originalFileName + "\nStatus: " + processingStatus + "\n\n");
         
         if (!responseMessageBuilder.toString().contains("Warning:") && !responseMessageBuilder.toString().contains("Error:")) {
@@ -171,7 +171,7 @@ public class DocumentService {
         return responseMessageBuilder.toString();
     }
 
-    // --- Helper Methods ---
+
 
     private String extractTextFromNativePdf(InputStream is) throws IOException {
         try (PDDocument document = PDDocument.load(is)) {
@@ -205,12 +205,12 @@ public class DocumentService {
         return ocrText.toString();
     }
 
-    // NEW: Overloaded method for text sufficiency check (default for PDFBox)
+    
     private boolean isTextQualitySufficient(String text) {
         return isTextQualitySufficient(text, MIN_TEXT_LENGTH_FOR_SUMMARY_PDFBOX);
     }
 
-    // Checks if the extracted text is sufficient and meaningful for summarization based on a given minLength.
+   
     private boolean isTextQualitySufficient(String text, int minLength) {
         if (text == null || text.trim().isEmpty()) {
             logger.debug("isTextQualitySufficient: Text is null or empty. Returning false.");
