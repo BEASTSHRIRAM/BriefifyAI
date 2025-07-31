@@ -1,4 +1,4 @@
-// src/main/java/com.ram.project.documentsummerizer/controller/DocumentController.java
+
 package com.ram.project.documentsummerizer.controller;
 
 import com.ram.project.documentsummerizer.model.Document;
@@ -9,8 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import net.sourceforge.tess4j.TesseractException;
 import java.util.List;
-import java.util.Optional; // Import Optional
-
+import java.util.Optional; 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.ram.project.documentsummerizer.model.User;
@@ -68,7 +67,7 @@ public class DocumentController {
         if (username == null) {
             return ResponseEntity.status(401).build();
         }
-        // Fetch user from DB to get userId
+        
         Optional<User> userOpt = userRepository.findByUsername(username);
         if (userOpt.isEmpty()) {
             return ResponseEntity.status(401).build();
@@ -78,7 +77,7 @@ public class DocumentController {
         return ResponseEntity.ok(userDocuments);
     }
 
-    // --- FIX: getDocumentById Method ---
+   
     @GetMapping("/{id}")
     public ResponseEntity<Document> getDocumentById(@PathVariable String id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -97,7 +96,7 @@ public class DocumentController {
             logger.warn("No username found in principal for document {}", id);
             return ResponseEntity.status(401).build();
         }
-        // Fetch user from DB to get userId
+        
         Optional<User> userOpt = userRepository.findByUsername(username);
         if (userOpt.isEmpty()) {
             logger.warn("User {} not found in DB for document {}", username, id);
