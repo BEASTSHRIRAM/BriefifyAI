@@ -7,14 +7,12 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Document(collection = "users")
-public class User implements UserDetails { // Implement UserDetails
-
+public class User implements UserDetails {
     @Id
     private String id;
-    private String username; // Or email, often used as username
-    private String password; // Store hashed password!
-
-    // Constructor
+    private String username; 
+    private String password; 
+    
     public User() {}
 
     public User(String username, String password) {
@@ -22,7 +20,7 @@ public class User implements UserDetails { // Implement UserDetails
         this.password = password;
     }
 
-    // Getters and Setters (Generate them using IDE)
+   
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
     public String getUsername() { return username; }
@@ -31,10 +29,9 @@ public class User implements UserDetails { // Implement UserDetails
     public void setPassword(String password) { this.password = password; }
 
 
-    // --- UserDetails interface methods ---
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // For simplicity, no roles for now. Or define a "ROLE_USER"
         return Collections.emptyList();
     }
 
