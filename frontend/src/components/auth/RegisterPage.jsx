@@ -26,7 +26,7 @@ function RegisterPage() {
     }
 
     try {
-      await axios.post(import.meta.env.VITE_BACKEND_API_URL + '/api/auth/register',{
+      await axios.post(import.meta.env.VITE_BACKEND_API_URL+'/api/auth/register',{
         username,
         password,
       });
