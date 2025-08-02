@@ -1,5 +1,6 @@
 # Briefify AI: Document Summarizer Web App
 
+
 ### Done By Shriram Kulkarni
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shriram-kulkarni-033b8328a)
 
@@ -90,6 +91,8 @@ This project uses **SonarCloud** integrated with **GitHub Actions** to automatic
     ```bash
     npm run dev
     ```
+    You can try still some problems in hosting
+    https://briefify-ai.vercel.app/
 
 The frontend will be available at `http://localhost:5173`. You can now register a new user and start summarizing documents!
 
