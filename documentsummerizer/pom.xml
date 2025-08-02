@@ -29,7 +29,10 @@
     <properties>
         <java.version>21</java.version>
         <spring-ai.version>1.0.0</spring-ai.version>
-        <jjwt.version>0.12.5</jjwt.version> </properties>
+        <jjwt.version>0.12.5</jjwt.version>
+        <sonar.organization>beastshriram</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
