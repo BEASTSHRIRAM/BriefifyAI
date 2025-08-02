@@ -29,8 +29,13 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
+      # --- NEW: Grant execute permission to the Maven Wrapper ---
+      - name: Grant execute permission for mvnw
+        run: chmod +x ./documentsummerizer/mvnw
+      # --- END NEW ---
+
       - name: Build and analyze with Maven
-        working-directory: ./documentsummerizer  # <--- NEW: This is the critical fix
+        working-directory: ./documentsummerizer
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
