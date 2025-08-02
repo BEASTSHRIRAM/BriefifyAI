@@ -28,14 +28,18 @@ jobs:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
+      
+
+      - name: Make Maven Wrapper executable
+        working-directory: ./documentsummerizer
+        run: chmod +x mvnw
+
 
       - name: Build and analyze with Maven
         working-directory: ./documentsummerizer
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: >
-          ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-          -Dsonar.projectKey=BEASTSHRIRAM_BriefifyAI
-          -Dgroq.api.key=${{ secrets.GROQ_API_KEY }}  # Pass Groq key to Maven
-          -Dspring.data.mongodb.uri=${{ secrets.MONGODB_URI }} # Pass MongoDB URI to Maven
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        run: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=BEASTSHRIRAM_BriefifyAI
