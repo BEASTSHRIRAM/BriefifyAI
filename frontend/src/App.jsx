@@ -1,8 +1,8 @@
 // frontend/src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from './components/Auth/LoginPage';
-import RegisterPage from './components/Auth/RegisterPage';
+import LoginPage from './components/auth/LoginPage';
+import RegisterPage from './components/auth/RegisterPage';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import DocumentUploadPage from './components/Documents/DocumentUploadPage';
