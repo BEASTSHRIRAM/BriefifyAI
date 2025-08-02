@@ -42,7 +42,7 @@ public class AuthService {
     private final long jwtExpirationMinutes = 1440; 
 
     public AuthService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder) { /
+                       PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
