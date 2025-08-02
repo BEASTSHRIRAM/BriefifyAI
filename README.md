@@ -22,23 +22,27 @@ The application intelligently extracts text from various types of PDFs (includin
 - **Personalized History:** Stores and retrieves document history specific to each authenticated user.
 - **Modern & Responsive UI:** A clean and professional user interface with light and dark mode, built with React and custom CSS.
 
-## 🛠️ Technology Stack
+---
 
-### **Backend (Spring Boot)**
-- **Framework:** Spring Boot 3.x
-- **Language:** Java 21
-- **API:** RESTful API with `spring-boot-starter-web`
-- **Database:** MongoDB Atlas for data persistence
-- **Security:** Spring Security with `jjwt` for JWT authentication
-- **Document Processing:** Apache PDFBox (for native text), Tess4J (for OCR)
-- **LLM Integration:** Groq's LLaMA 3 via `WebClient`
+## ✅ Code Quality & CI/CD
 
-### **Frontend (React.js)**
-- **Framework:** React.js 18 with Vite
-- **Routing:** React Router DOM
-- **State Management:** React Context API for global authentication state
-- **Styling:** Custom CSS with CSS variables for a polished light/dark mode and responsive design
-- **HTTP Client:** `axios` for API communication
+This project uses **SonarCloud** integrated with **GitHub Actions** to automatically analyze code quality, security, and maintainability on every push. This ensures the codebase remains clean, secure, and ready for future development.
+
+- **Quality Gate:**
+  ![Quality Gate Status](https://sonarcloud.io/api/project_badges/quality_gate?project=BEASTSHRIRAM_BriefifyAI)
+- **Maintainability:**
+  ![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=BEASTSHRIRAM_BriefifyAI&metric=sqale_rating)
+- **Security Rating:**
+  ![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=BEASTSHRIRAM_BriefifyAI&metric=security_rating)
+- **Code Coverage:**
+  ![Coverage](https://sonarcloud.io/api/project_badges/measure?project=BEASTSHRIRAM_BriefifyAI&metric=coverage)
+
+**Key Insights:**
+- My focus is on writing reliable and maintainable code.
+- Identified security hotspots have been reviewed and addressed.
+- The next step is to add comprehensive unit tests to improve code coverage.
+
+---
 
 ## 🖼️ Application Screenshots
 
