@@ -1,4 +1,4 @@
-// frontend/src/App.jsx
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './components/auth/LoginPage';
@@ -6,7 +6,6 @@ import RegisterPage from './components/auth/RegisterPage';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import DocumentUploadPage from './components/Documents/DocumentUploadPage';
-
 import { useAuth } from './context/AuthContext';
 
 const ProtectedRoute = ({ children }) => {
@@ -16,7 +15,6 @@ const ProtectedRoute = ({ children }) => {
   }
   return children;
 };
-
 
 function App() {
   return (
@@ -40,7 +38,6 @@ function App() {
               }
             />
 
-            {/* Default Route: Redirect authenticated users to /upload, others to /login */}
             <Route
               path="/"
               element={<Navigate to="/upload" replace />}
@@ -50,11 +47,6 @@ function App() {
 
         <Footer />
       </div>
-    </Router>
-  );
-}
-
-export default App;
     </Router>
   );
 }
