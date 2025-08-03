@@ -1,4 +1,4 @@
-
+// frontend/src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './components/auth/LoginPage';
@@ -21,7 +21,6 @@ function App() {
     <Router>
       <div className="app-container">
         <Header />
-
         <main className="app-main-content">
           <Routes>
             {/* Public Routes */}
@@ -38,13 +37,10 @@ function App() {
               }
             />
 
-            <Route
-              path="/"
-              element={<Navigate to="/upload" replace />}
-            />
+            {/* Default Redirect */}
+            <Route path="/" element={<Navigate to="/upload" replace />} />
           </Routes>
         </main>
-
         <Footer />
       </div>
     </Router>
