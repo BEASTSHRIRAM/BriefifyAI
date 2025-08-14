@@ -5,6 +5,7 @@ import com.ram.project.documentsummerizer.security.JwtAuthFilter;
 import com.ram.project.documentsummerizer.service.AuthService;
 import com.ram.project.documentsummerizer.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -68,7 +69,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.setAllowedOrigins(List.of("http://localhost:5173","https://briefify-ai.vercel.app"));
-        config.setAllowedHeaders(List.of("*"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setMaxAge(3600L);
         source.registerCorsConfiguration("/**", config);
@@ -88,6 +89,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() 
                 .requestMatchers("/api/documents/upload").authenticated()
                 .requestMatchers("/api/documents/user").authenticated()
                 .requestMatchers("/api/documents/{id}").authenticated()
