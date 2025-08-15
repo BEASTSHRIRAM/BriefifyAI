@@ -1,12 +1,11 @@
-// frontend/src/components/Documents/DocumentDetailPage.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom'; // Import useParams and useNavigate
+import { useParams, useNavigate } from 'react-router-dom'; 
 import { useAuth } from '../../context/AuthContext';
-import LogoutButton from '../auth/LogoutButton'; // Ensure LogoutButton import
+import LogoutButton from '../auth/LogoutButton'; 
 
 function DocumentDetailPage() {
-  const { id } = useParams(); // Get document ID from URL params
+  const { id } = useParams();
   const [document, setDocument] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -17,18 +16,20 @@ function DocumentDetailPage() {
     const fetchDocument = async () => {
       if (!isAuthenticated || !token) {
         setLoading(false);
-        navigate('/login'); // Redirect if not authenticated
+        navigate('/login');
         return;
       }
       try {
-        const res = await axios.get(`http://localhost:8080/api/documents/${id}`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          },
-        });
+       const res = await axios.get(
+  `${import.meta.env.VITE_BACKEND_API_URL}/api/documents/${id}`,
+  {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+  }
+);
         setDocument(res.data);
       } catch (err) {
-        // Improved error logging
         if (err.response) {
           console.error('Failed to fetch document details:', err.response.status, err.response.data);
         } else if (err.request) {
@@ -47,7 +48,7 @@ function DocumentDetailPage() {
     };
 
     fetchDocument();
-  }, [id, isAuthenticated, token, navigate]); // Re-fetch when ID or auth state changes
+  }, [id, isAuthenticated, token, navigate]);
 
   if (loading) {
     return (
@@ -84,12 +85,12 @@ function DocumentDetailPage() {
 
   return (
     <div className="main-dashboard-container">
-      <div className="dashboard-top-bar-history"> {/* Re-using header style */}
+      <div className="dashboard-top-bar-history"> 
         <h2 className="main-dashboard-title">{document.originalFileName}</h2>
         <button onClick={() => navigate('/history')} className="auth-button login-button" style={{width: 'auto', margin: '0 10px'}}>Back to History</button> {/* Inline style for button size */}
       </div>
 
-      <div className="response-display"> {/* Re-using response display style */}
+      <div className="response-display"> 
         <h3>Document Content Overview</h3>
         {document.extractedText && (
           <div className="summary-content">
@@ -104,7 +105,6 @@ function DocumentDetailPage() {
             <pre className="summary-text">{document.summary}</pre>
           </div>
         )}
-        {/* If the original Document model had status/warnings, you'd display them here */}
       </div>
 
       <div className="logout-button-wrapper">
