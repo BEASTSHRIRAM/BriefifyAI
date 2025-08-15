@@ -1,15 +1,15 @@
-// frontend/src/components/Documents/DocumentHistoryPage.jsx
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { Link as ReactRouterLink } from 'react-router-dom';
-import LogoutButton from '../auth/LogoutButton'; // Ensure LogoutButton import
+import LogoutButton from '../auth/LogoutButton'; 
 
 function DocumentHistoryPage() {
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const { token, isAuthenticated } = useAuth(); // Get token and auth status
+  const { token, isAuthenticated } = useAuth(); 
 
   useEffect(() => {
     const fetchDocuments = async () => {
@@ -18,12 +18,15 @@ function DocumentHistoryPage() {
         setError('You must be logged in to view document history.');
         return;
       }
-      try {
-        const res = await axios.get('http://localhost:8080/api/documents/user', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          },
-        });
+     try {
+  const res = await axios.get(
+    `${import.meta.env.VITE_BACKEND_API_URL}/api/documents/user`,
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+    }
+  );
         setDocuments(res.data);
       } catch (err) {
         console.error('Failed to fetch documents:', err.response || err);
@@ -34,7 +37,7 @@ function DocumentHistoryPage() {
     };
 
     fetchDocuments();
-  }, [isAuthenticated, token]); // Re-fetch when auth state/token changes
+  }, [isAuthenticated, token]);
 
   if (loading) {
     return (
@@ -58,7 +61,7 @@ function DocumentHistoryPage() {
 
   return (
     <div className="main-dashboard-container">
-      <div className="dashboard-top-bar-history"> {/* New class for history header */}
+      <div className="dashboard-top-bar-history"> 
         <h2 className="main-dashboard-title">Your Document History</h2>
         <ReactRouterLink to="/upload" className="upload-new-doc-link">Upload New Document</ReactRouterLink>
       </div>
@@ -66,9 +69,9 @@ function DocumentHistoryPage() {
       {documents.length === 0 ? (
         <p className="status-message">No documents uploaded yet. Go to <ReactRouterLink to="/upload">Upload</ReactRouterLink> page to add one.</p>
       ) : (
-        <div className="document-list"> {/* New class for document list container */}
+        <div className="document-list"> 
           {documents.map((doc) => (
-            <div key={doc.id} className="document-item"> {/* New class for each document item */}
+            <div key={doc.id} className="document-item"> 
               <p className="document-filename">{doc.originalFileName}</p>
               <div className="summary-preview-box">
                 <span className="summary-label">Summary:</span>
