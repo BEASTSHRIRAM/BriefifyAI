@@ -1,5 +1,6 @@
 # Briefify AI: Document Summarizer Web App
 Project Video : https://youtu.be/lJIJzMTuKPs?si=Lnj1U3gIfHYBwPtK 
+This Project is Live in : https://briefify-ai.vercel.app/
 
 
 ### Done By Shriram Kulkarni
